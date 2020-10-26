@@ -12,7 +12,6 @@ TDSSensor tdsSensor(A3);
 DOSensor doSensor(A4);
 TURSensor turSensor(A5);
 
-#define LED 13
 #define samplingInterval 20 
 #define printInterval 2000
 
@@ -21,7 +20,7 @@ void setup() {
     while (!Serial);
 
     Serial.println("LoRa Sender");
-
+    pinMode(LED_BUILTIN, OUTPUT);
     if (!LoRa.begin(915E6)) {
     Serial.println("Starting LoRa failed!");
     while (1);
@@ -33,10 +32,10 @@ void loop() {
      static unsigned long printTime=millis();
   
      
-//     digitalWrite(LED_BUILTIN, HIGH);
-//     delay(100); 
-//     digitalWrite(LED_BUILTIN, LOW);
-//     delay(100);
+     digitalWrite(LED_BUILTIN, HIGH);
+     delay(1000); 
+     digitalWrite(LED_BUILTIN, LOW);
+     delay(1000);
      if(millis()- samplingTime > samplingInterval)
      {  
         orpSensor.getAnalogORP();
